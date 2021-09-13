@@ -30,7 +30,6 @@ namespace Roommates.Repositories
         ///   All communication between the application and database passes through this connection.
         /// </summary>
         protected SqlConnection Connection => new SqlConnection(_connectionString);
-
     }
 }
 

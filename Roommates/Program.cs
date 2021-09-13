@@ -86,6 +86,34 @@ namespace Roommates
                         Console.ReadKey();
                         break;
 
+                    case ("Assign a chore"):
+                        List<Chore> pendingChores = choreRepo.GetUnassignedChores();
+                        List<Roommate> pendingRoommates = rmRepo.GetAll();
+
+                        Console.WriteLine("Please select a chore to assign:");
+                        foreach (Chore c in pendingChores)
+                        {
+                            Console.WriteLine($"{c.Id} - {c.Name}");
+                        }
+                        int choreSelection = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Please select a roommate to assign this chore:");
+                        foreach (Roommate r in pendingRoommates)
+                        {
+                            Console.WriteLine($"{r.Id} - {r.FirstName} {r.LastName}");
+                        }
+                        int rmSelection = int.Parse(Console.ReadLine());
+
+                        choreRepo.AssignChore(rmSelection, choreSelection);
+                        Console.WriteLine("Chore has been successfully assigned");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        break;
+
+
+
+
+
                     case ("Search for roommate"):
                         Console.Write("Roommate Id: ");
                         int roommateId = int.Parse(Console.ReadLine());
@@ -115,6 +143,7 @@ namespace Roommates
                 "Add a room",
                 "Show all chores",
                 "See a list of unassigned chores",
+                "Assign a chore",
                 "Search for roommate",
                 "Exit"
             };
